@@ -14,23 +14,33 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         boolean StillIn = true;
         FastReader fr = new FastReader();
+        ArrayList<String> list = new ArrayList<String>(100);
         while(StillIn) {
             String input = fr.nextLine();
             System.out.println("    ____________________________________________________________");
-            if(input.equals("list")) {
-                System.out.println(list());
-            } else if(input.equals("blah")) {
-                System.out.println(blah());
-            } else if(input.equals("bye")) {
+            if(input.equals("bye")) {
                 System.out.println(bye());
                 StillIn = false;
+                continue;
+            } else if(input.equals("list")) {
+                list(list);
+                continue;
+            }
+
+            if(list.contains(input)) {
+                System.out.println(input);
+            } else {
+                list.add(input);
+                System.out.println("added: " + input);
             }
             System.out.println("    ____________________________________________________________");
         }
     }
 
-    public static String list() {
-        return "    list";
+    public static void list(ArrayList<String> lst) {
+        for(int i=0; i < lst.size(); i++) {
+            System.out.printf("%d. %s\n", i + 1, lst.get(i));
+        }
     }
 
     public static String blah() {
