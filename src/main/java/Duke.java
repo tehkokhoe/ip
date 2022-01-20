@@ -14,30 +14,49 @@ public class Duke {
         System.out.println("    ____________________________________________________________");
         boolean StillIn = true;
         FastReader fr = new FastReader();
-        ArrayList<String> list = new ArrayList<String>(100);
+        ArrayList<Task> list = new ArrayList<Task>(100);
         while(StillIn) {
-            String input = fr.nextLine();
+            String in = fr.nextLine();
+            String[] input = in.split(" ");
+            Task task = new Task(in);
+            boolean printed = false;
             System.out.println("    ____________________________________________________________");
-            if(input.equals("bye")) {
+            if(input[0].equals("bye")) {
                 System.out.println(bye());
                 StillIn = false;
-                continue;
-            } else if(input.equals("list")) {
+                printed = true;
+            } else if(input[0].equals("list")) {
                 list(list);
+                printed = true;
+            } else if(input[0].equals("mark")) {
+                int num = Integer.parseInt(input[1]);
+                list.get(num - 1).setDone();
+                System.out.println("Nice! I've marked this task as done:");
+                System.out.println("[X] " + list.get(num - 1).getTask());
+                printed = true;
+            } else if(input[0].equals("unmark")) {
+                int num = Integer.parseInt(input[1]);
+                list.get(num - 1).setUndone();
+                System.out.println("OK, I've marked this task as not done yet:");
+                System.out.println("[ ] " + list.get(num - 1).getTask());
+            }
+
+            if(printed) {
+                System.out.println("    ____________________________________________________________");
                 continue;
             }
 
-            if(list.contains(input)) {
-                System.out.println(input);
+            if(list.contains(task)) {
+                System.out.println(task);
             } else {
-                list.add(input);
-                System.out.println("added: " + input);
+                list.add(task);
+                System.out.println("added: " + in);
             }
             System.out.println("    ____________________________________________________________");
         }
     }
 
-    public static void list(ArrayList<String> lst) {
+    public static void list(ArrayList<Task> lst) {
         for(int i=0; i < lst.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, lst.get(i));
         }
