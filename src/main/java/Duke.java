@@ -8,7 +8,8 @@ public class Duke {
         UNMARK,
         TODO,
         DEADLINE,
-        EVENT
+        EVENT,
+        DELETE
         ;
     }
 
@@ -116,6 +117,22 @@ public class Duke {
                         System.out.println("     " + event);
                         System.out.printf("    Now you have %d task(s) in the list\n", list.size());
                         break;
+
+                    case DELETE:
+                        if(input.length < 2) {
+                            throw new DukeException("    ☹ OOPS!!! I don't know what to delete");
+                        }
+
+                        int removenum = Integer.parseInt(input[1]);
+
+                        if(removenum > list.size()) {
+                            throw new DukeException("    ☹ OOPS!!! I don't see your task");
+                        }
+
+                        Task removedtask = list.remove(removenum - 1);
+                        System.out.println("    Noted. I've removed this task:");
+                        System.out.println("     " + removedtask);
+                        System.out.printf("    Now you have %d task(s) in the list\n", list.size());
                 }
             } catch(DukeException err) {
                 System.out.println(err.getMessage());
