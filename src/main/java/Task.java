@@ -1,14 +1,14 @@
 public class Task {
     private String task;
-    private boolean done;
+    private boolean isDone;
 
     public Task() {
-        this.done = false;
+        this.isDone = false;
     }
 
     public Task(String task) {
         this.task = task;
-        this.done = false;
+        this.isDone = false;
     }
 
     public String getTask() {
@@ -16,11 +16,11 @@ public class Task {
     }
 
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     public void setUndone() {
-        this.done = false;
+        this.isDone = false;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Task {
 
     @Override
     public boolean equals(Object other) {
-        if(other instanceof Task){
+        if (other instanceof Task){
             Task toCompare = (Task) other;
             return this.task.equals(toCompare.getTask());
         }
@@ -40,11 +40,23 @@ public class Task {
     @Override
     public String toString() {
         String temp;
-        if(this.done) {
+        if (this.isDone) {
             temp = "X";
         } else {
             temp = " ";
         }
         return "[" + temp + "] " + this.task;
+    }
+
+    public String toRecord() {
+        int temp;
+
+        if (this.isDone) {
+            temp = 1;
+        } else {
+            temp = 0;
+        }
+
+        return temp + " | " + this.task;
     }
 }
