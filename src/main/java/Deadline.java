@@ -1,13 +1,43 @@
-public class Deadline extends Task {
-    private String by;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.DateTimeFormatterBuilder;
+import org.joda.time.format.DateTimeParser;
 
-    public Deadline(String task, String by) {
+public class Deadline extends Task {
+    private String byString;
+    private DateTime byDate;
+
+    public Deadline(String task, String byString) {
         super(task);
-        this.by = by;
+        this.byString = byString;
+
+        try {
+            DateTimeParser[] dateParsers = {
+                    DateTimeFormat.forPattern("d/MM/yyyy").getParser(),
+                    DateTimeFormat.forPattern("yyyy-MM-dd").getParser(),
+                    DateTimeFormat.forPattern("HHmm").getParser(),
+                    DateTimeFormat.forPattern("d/MM/yyyy HHmm").getParser(),
+                    DateTimeFormat.forPattern("yyyy-MM-dd HHmm").getParser(),
+            };
+            DateTimeFormatter formatter = new DateTimeFormatterBuilder().append(null, dateParsers).toFormatter();
+            DateTime date = formatter.parseDateTime(byString);
+            this.byDate = date;
+        } catch (UnsupportedOperationException e) {
+            this.byDate = null;
+        } catch (IllegalArgumentException e) {
+            this.byDate = null;
+        }
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        if (this.byDate == null) {
+            return "[D]" + super.toString() + " (by: " + byString + ")\n    If you wanted me to recognize your date, " +
+                    "you might want to\n    use a date time format like: '2/12/2021 1800'";
+        } else {
+            String formattedDate = DateTimeFormat.forPattern("MMM dd yyyy h:mm a").print(byDate);
+            return "[D]" + super.toString() + " (by: " + formattedDate + ")";
+        }
     }
 }
