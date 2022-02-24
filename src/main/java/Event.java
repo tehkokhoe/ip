@@ -11,7 +11,7 @@ public class Event extends Task {
     public Event(String task, String atString) {
         super(task);
         this.atString = atString;
-        String arr[] = atString.split("\\s+-\\s+", 2);
+        String arr[] = atString.split("\\s*-\\s*", 2);
 
         try {
             DateTimeParser[] dateParsers = {
