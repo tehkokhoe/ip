@@ -33,8 +33,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (this.byDate == null) {
-            return "[D]" + super.toString() + " (by: " + byString + ")\n    If you wanted me to recognize your date, " +
-                    "you might want to\n    use a date time format like: '2/12/2021 1800'";
+            return "[D]" + super.toString() + " (by: " + byString + ")";
         } else {
             String formattedDate = DateTimeFormat.forPattern("MMM dd yyyy h:mm a").print(byDate);
             return "[D]" + super.toString() + " (by: " + formattedDate + ")";
@@ -43,6 +42,6 @@ public class Deadline extends Task {
 
     @Override
     public String toRecord() {
-        return "D | " + super.toRecord() + " | " + by;
+        return "D | " + super.toRecord() + " | " + byString;
     }
 }

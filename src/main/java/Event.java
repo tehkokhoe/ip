@@ -64,6 +64,6 @@ public class Event extends Task {
 
     @Override
     public String toRecord() {
-        return "E | " + super.toRecord() + " | " + at;
+        return "E | " + super.toRecord() + " | " + atString;
     }
 }
