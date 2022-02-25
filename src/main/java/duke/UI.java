@@ -3,10 +3,10 @@ package duke;
 import java.util.ArrayList;
 
 public class UI {
-    private FastReader fr;
     private static final String INDENT = "    ";
     private static final String SPACE = " ";
     private static final String[] dateFormat = {"d/MM/yyyy", "yyyy-MM-dd", "HHmm", "d/MM/yyyy HHmm", "yyyy-MM-dd HHmm"};
+    private FastReader fr;
 
     public UI() {
         fr = new FastReader();

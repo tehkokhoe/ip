@@ -13,7 +13,7 @@ public class Event extends Task {
     public Event(String task, String atString) {
         super(task);
         this.atString = atString;
-        String arr[] = atString.split("\\s*-\\s*", 2);
+        String[] arr = atString.split("\\s*-\\s*", 2);
 
         try {
             DateTimeParser[] dateParsers = {
@@ -53,11 +53,11 @@ public class Event extends Task {
                         + " - " + DateTimeFormat.forPattern("h:mm a").print(atDate[1]);
             }
         } else if (this.atDate[0] == null) {
-            String arr[] = atString.split("\\s+-\\s+", 2);
+            String[] arr = atString.split("\\s+-\\s+", 2);
             formattedDate = arr[0] + "-"
                     + DateTimeFormat.forPattern("MMM dd yyyy h:mm a").print(atDate[1]);
         } else {
-            String arr[] = atString.split("\\s+-\\s+", 2);
+            String[] arr = atString.split("\\s+-\\s+", 2);
             formattedDate = DateTimeFormat.forPattern("MMM dd yyyy h:mm a").print(atDate[0])
                     + "-" + arr[1];
         }

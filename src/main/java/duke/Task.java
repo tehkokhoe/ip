@@ -32,7 +32,7 @@ public class Task {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Task){
+        if (other instanceof Task) {
             Task toCompare = (Task) other;
             return this.task.equals(toCompare.getTask());
         }

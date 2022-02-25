@@ -3,53 +3,49 @@ package duke;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class FastReader {
-	BufferedReader br;
-	StringTokenizer st;
+    private BufferedReader br;
+    private StringTokenizer st;
 
-	public FastReader() {
-		br = new BufferedReader(
-				new InputStreamReader(System.in));
-	}
+    public FastReader() {
+        br = new BufferedReader(new InputStreamReader(System.in));
+    }
 
-	String next() {
-		while (st == null || !st.hasMoreElements()) {
-			try {
-				st = new StringTokenizer(br.readLine());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+    String next() {
+        while (st == null || !st.hasMoreElements()) {
+            try {
+                st = new StringTokenizer(br.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
-		return st.nextToken();
-	}
+        return st.nextToken();
+    }
 
-	int nextInt() {
-		return Integer.parseInt(next());
-	}
+    int nextInt() {
+        return Integer.parseInt(next());
+    }
 
-	long nextLong() {
-		return Long.parseLong(next());
-	}
+    long nextLong() {
+        return Long.parseLong(next());
+    }
 
-	double nextDouble() {
-		return Double.parseDouble(next());
-	}
+    double nextDouble() {
+        return Double.parseDouble(next());
+    }
 
-	String nextLine() {
-		String str = "";
+    String nextLine() {
+        String str = "";
 
-		try {
-			str = br.readLine();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
+        try {
+            str = br.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-		return str;
-	}
+        return str;
+    }
 }
-
