@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class Parser {
-    public static Command parseCommand(String[] inputs) {
+    public static Command parseCommand(String[] inputs) throws IllegalArgumentException {
         Command cmd = Command.valueOf(inputs[0].toUpperCase());
         return cmd;
     }
