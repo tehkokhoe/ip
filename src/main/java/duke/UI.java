@@ -154,6 +154,11 @@ public class UI {
         }
     }
 
+    /**
+     * Print found tasks.
+     *
+     * @param found the list of found tasks containing keyword.
+     */
     public static void findDisplay(ArrayList<Task> found) {
         if (found.size() < 1) {
             System.out.println(INDENT + "I couldn't find any task with that keyword");

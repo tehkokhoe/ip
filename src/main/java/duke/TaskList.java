@@ -121,6 +121,12 @@ public class TaskList {
         UI.deleteDisplay(deletedTask, display);
     }
 
+    /**
+     * Find a task from the task list.
+     *
+     * @param inputs user input that has been seperated into command and keyword.
+     * @throws DukeException If keyword is not given.
+     */
     public void find(String[] inputs) throws DukeException {
         String keyword = Parser.parseKeyword(inputs);
         ArrayList<Task> foundTasks = new ArrayList<>();
