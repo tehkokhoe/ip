@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 public class FastReader {
     private BufferedReader br;
     private StringTokenizer st;
-
+    
     /**
     * Constructs a reader that uses {@link BufferedReader}.
     * @author Rishabh Mahrsee, GeeksforGeeks
@@ -53,4 +53,3 @@ public class FastReader {
         return str;
     }
 }
-
