@@ -20,10 +20,16 @@ public class Duke {
         boolean isRunning = true;
         while (isRunning) {
             String[] inputs = Parser.parseInput(ui);
-            Command cmd = Parser.parseCommand(inputs);
             UI.startLine();
-            this.execute(cmd, inputs);
-            isRunning = cmd.isRunning();
+
+            try {
+                Command cmd = Parser.parseCommand(inputs);
+                this.execute(cmd, inputs);
+                isRunning = cmd.isRunning();
+            } catch (IllegalArgumentException e) {
+                ui.showError(UI.getIndent() + "Invalid Command: " + inputs[0]);
+            }
+
             UI.endLine();
         }
     }
@@ -35,44 +41,48 @@ public class Duke {
     public void execute(Command cmd, String[] inputs) {
         try {
             switch (cmd) {
-                case BYE:
-                    ui.byeDisplay();
-                    break;
-                case LIST:
-                    tasks.list();
-                    break;
-                case MARK:
-                    tasks.mark(inputs);
-                    storage.save(tasks.getTasks());
-                    break;
-                case UNMARK:
-                    tasks.unmark(inputs);
-                    storage.save(tasks.getTasks());
-                    break;
-                case TODO:
-                    tasks.addToDo(inputs);
-                    storage.save(tasks.getTasks());
-                    break;
-                case DEADLINE:
-                    tasks.addDeadline(inputs);
-                    storage.save(tasks.getTasks());
-                    break;
-                case EVENT:
-                    tasks.addEvent(inputs);
-                    storage.save(tasks.getTasks());
-                    break;
-                case DELETE:
-                    tasks.delete(inputs);
-                    storage.save(tasks.getTasks());
-                    break;
-                case DATEFORMAT:
-                    ui.showDateFormats();
-                    break;
+            case BYE:
+                ui.byeDisplay();
+                break;
+            case LIST:
+                tasks.list();
+                break;
+            case MARK:
+                tasks.mark(inputs);
+                storage.save(tasks.getTasks());
+                break;
+            case UNMARK:
+                tasks.unmark(inputs);
+                storage.save(tasks.getTasks());
+                break;
+            case TODO:
+                tasks.addToDo(inputs);
+                storage.save(tasks.getTasks());
+                break;
+            case DEADLINE:
+                tasks.addDeadline(inputs);
+                storage.save(tasks.getTasks());
+                break;
+            case EVENT:
+                tasks.addEvent(inputs);
+                storage.save(tasks.getTasks());
+                break;
+            case DELETE:
+                tasks.delete(inputs);
+                storage.save(tasks.getTasks());
+                break;
+            case DATEFORMAT:
+                ui.showDateFormats();
+                break;
+            default:
+                throw new IllegalStateException(UI.getIndent() + "Unexpected value: " + cmd);
             }
-        } catch (DukeException err) {
-            ui.showError(err.getMessage());
-        } catch (NumberFormatException err) {
+        } catch (NumberFormatException e) {
             ui.showError(UI.getIndent() + "☹ OOPS!!! Task number given is not suitable");
+        } catch (DukeException | IllegalStateException e) {
+            ui.showError(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            ui.showError(UI.getIndent() + "Invalid command: " + cmd);
         }
     }
 }
