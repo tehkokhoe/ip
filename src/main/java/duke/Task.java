@@ -8,6 +8,16 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Constructs a task.
+     * <p>
+     * Task is initialized as not done.
+     *
+     * @param task the task description.
+     * @return the index of the task in the list to delete.
+     * @throws DukeException If index is not given, index given is not an integer or index > size
+     * of task list.
+     */
     public Task(String task) {
         this.task = task;
         this.isDone = false;
@@ -32,7 +42,7 @@ public class Task {
 
     @Override
     public boolean equals(Object other) {
-        if (other instanceof Task){
+        if (other instanceof Task) {
             Task toCompare = (Task) other;
             return this.task.equals(toCompare.getTask());
         }
@@ -50,6 +60,11 @@ public class Task {
         return "[" + temp + "] " + this.task;
     }
 
+    /**
+     * Returns a {@link String} representing a {@link Task} in the form convenient for record.
+     *
+     * @return the text representing the task to record in save file.
+     */
     public String toRecord() {
         int temp;
 

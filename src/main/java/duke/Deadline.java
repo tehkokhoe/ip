@@ -10,6 +10,13 @@ public class Deadline extends Task {
     private String byString;
     private DateTime byDate;
 
+    /**
+     * Constructs a {@link Task} that has a date associated to it. The date
+     * associated is normally the date that the {@link Task} should be finished.
+     *
+     * @param task the description of the task.
+     * @param byString the due date of the task.
+     */
     public Deadline(String task, String byString) {
         super(task);
         this.byString = byString;

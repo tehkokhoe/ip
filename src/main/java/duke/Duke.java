@@ -4,7 +4,13 @@ public class Duke {
     private UI ui;
     private Storage storage;
     private TaskList tasks;
-    public Duke(String filePath) {
+
+    /**
+     * Constructs an instance of the main program, by setting up the
+     * {@link UI}, {@link Storage}, and loads the existing {@link TaskList}
+     * or creates a new {@link TaskList} if one does not already exist.
+     */
+    public Duke() {
         ui = new UI();
         storage = new Storage();
         try {
@@ -15,6 +21,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Displays start screen. Runs program and keeps the program running until
+     * user exits. Accepts user input while running.
+     */
     public void run() {
         ui.startScreen();
         boolean isRunning = true;
@@ -35,9 +45,16 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
+    /**
+     * Executes {@link Command} and inputs given.
+     *
+     * @param cmd one of the commands given in the enum {@link Command}
+     * @param inputs the user input the has been split into command and description
+     * @see Command
+     */
     public void execute(Command cmd, String[] inputs) {
         try {
             switch (cmd) {

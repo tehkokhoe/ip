@@ -7,16 +7,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 
 public class Storage {
     public Storage() {
     }
 
+    /**
+     * Saves the task list in a file.
+     *
+     * @param tasks list of tasks saved.
+     */
     public void save(ArrayList<String> tasks) {
         String working = System.getProperty("user.dir");
         Path path = Paths.get(working, "data");
@@ -44,6 +47,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns data out of saved file as an {@link ArrayList}.
+     *
+     * @return the list of entries retrieved from save file.
+     * @throws DukeException If file could not be used or created.
+     */
     public ArrayList<String> load() throws DukeException {
         String working = System.getProperty("user.dir");
         Path path = Paths.get(working, "data");

@@ -3,15 +3,18 @@ package duke;
 import java.util.ArrayList;
 
 public class UI {
-    private FastReader fr;
+    private static final String[] dateFormat = {"d/MM/yyyy", "yyyy-MM-dd", "HHmm", "d/MM/yyyy HHmm", "yyyy-MM-dd HHmm"};
     private static final String INDENT = "    ";
     private static final String SPACE = " ";
-    private static final String[] dateFormat = {"d/MM/yyyy", "yyyy-MM-dd", "HHmm", "d/MM/yyyy HHmm", "yyyy-MM-dd HHmm"};
+    private FastReader fr;
 
     public UI() {
         fr = new FastReader();
     }
 
+    /**
+     * Prints the starting screen
+     */
     public void startScreen() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -41,6 +44,9 @@ public class UI {
         System.out.println(INDENT + "Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Prints the list of tasks.
+     */
     public static void listDisplay(ArrayList<Task> tasks) {
         for (int i = 0; i < tasks.size(); i++) {
             if (i == 0) {
@@ -55,11 +61,21 @@ public class UI {
         }
     }
 
+    /**
+     * Print marked task.
+     *
+     * @param task the marked task.
+     */
     public static void markDisplay(Task task) {
         System.out.println(INDENT + "Nice! I've marked this task as done:");
         System.out.println(INDENT + SPACE + task);
     }
 
+    /**
+     * Print unmarked task.
+     *
+     * @param task the unmarked task.
+     */
     public static void unmarkDisplay(Task task) {
         System.out.println(INDENT + "OK, I've marked this task as not done yet:");
         System.out.println(INDENT + SPACE + task);
@@ -73,24 +89,48 @@ public class UI {
         return SPACE;
     }
 
+    /**
+     * Print added {@link ToDo} {@link Task}.
+     *
+     * @param toDo the added toDo task.
+     * @param tasks the list of tasks.
+     */
     public static void toDoDisplay(Task toDo, ArrayList<Task> tasks) {
         System.out.println(INDENT + "Got it. I've added this task:");
         System.out.println(INDENT + SPACE + toDo);
         System.out.printf(INDENT + "Now you have %d task(s) in the list\n", tasks.size());
     }
 
+    /**
+     * Print added {@link Deadline} {@link Task}.
+     *
+     * @param deadline the added deadline task.
+     * @param tasks the list of tasks.
+     */
     public static void deadlineDisplay(Task deadline, ArrayList<Task> tasks) {
         System.out.println(INDENT + "Got it. I've added this task:");
         System.out.println(INDENT + SPACE + deadline);
         System.out.printf(INDENT + "Now you have %d task(s) in the list\n", tasks.size());
     }
 
+    /**
+     * Print added {@link Event} {@link Task}.
+     *
+     * @param event the added event task.
+     * @param tasks the list of tasks.
+     */
     public static void eventDisplay(Task event, ArrayList<Task> tasks) {
         System.out.println(INDENT + "Got it. I've added this task:");
         System.out.println(INDENT + SPACE + event);
         System.out.printf(INDENT + "Now you have %d task(s) in the list\n", tasks.size());
     }
 
+    /**
+     * Print deleted task.
+     *
+     * @param deletedTask the deleted task.
+     * @param tasks the list of tasks.
+     */
     public static void deleteDisplay(Task deletedTask, ArrayList<Task> tasks) {
         System.out.println(INDENT + "Noted. I've removed this task:");
         System.out.println(INDENT + SPACE + deletedTask);
@@ -105,6 +145,9 @@ public class UI {
         System.out.println(e);
     }
 
+    /**
+     * Print a list of viable date formats for user input.
+     */
     public void showDateFormats() {
         for (String s : dateFormat) {
             System.out.println(s);
