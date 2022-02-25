@@ -45,6 +45,11 @@ public enum Command {
         public boolean isRunning() {
             return true;
         }
+    },
+    FIND {
+        public boolean isRunning() {
+            return true;
+        }
     };
 
     public abstract boolean isRunning();

@@ -153,4 +153,19 @@ public class UI {
             System.out.println(s);
         }
     }
+
+    public static void findDisplay(ArrayList<Task> found) {
+        if (found.size() < 1) {
+            System.out.println(INDENT + "I couldn't find any task with that keyword");
+            return;
+        }
+
+        System.out.println(INDENT + "Here are the matching tasks in your list:");
+        int i = 1;
+
+        for (Task task : found) {
+            System.out.printf(INDENT + SPACE + "%d. %s\n", i, task);
+            i += 1;
+        }
+    }
 }

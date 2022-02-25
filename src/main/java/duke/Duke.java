@@ -91,6 +91,9 @@ public class Duke {
             case DATEFORMAT:
                 ui.showDateFormats();
                 break;
+            case FIND:
+                tasks.find(inputs);
+                break;
             default:
                 throw new IllegalStateException(UI.getIndent() + "Unexpected value: " + cmd);
             }
