@@ -22,7 +22,7 @@ Features:
 - [ ] Reminders (coming soon)
 
 If you are a Java programmer, you can use it to practice Java too. Here's the `main` method:
-```aidl
+```
 public static void main(String[] args) {
     new Duke().run();
 }
