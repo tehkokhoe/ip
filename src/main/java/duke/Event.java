@@ -10,10 +10,17 @@ public class Event extends Task {
     private String atString;
     private DateTime[] atDate;
 
+    /**
+     * Constructs a {@link Task} that have dates associated to it. The date
+     * associated is normally the date that the {@link Task} occurs and ends.
+     *
+     * @param task the description of the task.
+     * @param atString the start date and end date of the task.
+     */
     public Event(String task, String atString) {
         super(task);
         this.atString = atString;
-        String arr[] = atString.split("\\s*-\\s*", 2);
+        String[] arr = atString.split("\\s*-\\s*", 2);
 
         try {
             DateTimeParser[] dateParsers = {
@@ -53,11 +60,11 @@ public class Event extends Task {
                         + " - " + DateTimeFormat.forPattern("h:mm a").print(atDate[1]);
             }
         } else if (this.atDate[0] == null) {
-            String arr[] = atString.split("\\s+-\\s+", 2);
+            String[] arr = atString.split("\\s+-\\s+", 2);
             formattedDate = arr[0] + "-"
                     + DateTimeFormat.forPattern("MMM dd yyyy h:mm a").print(atDate[1]);
         } else {
-            String arr[] = atString.split("\\s+-\\s+", 2);
+            String[] arr = atString.split("\\s+-\\s+", 2);
             formattedDate = DateTimeFormat.forPattern("MMM dd yyyy h:mm a").print(atDate[0])
                     + "-" + arr[1];
         }
