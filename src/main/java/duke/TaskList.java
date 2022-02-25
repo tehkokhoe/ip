@@ -74,4 +74,15 @@ public class TaskList {
         tasks.remove(deleteIndex - 1);
         UI.deleteDisplay(deletedTask, display);
     }
+
+    public void find(String[] inputs) throws DukeException {
+        String keyword = Parser.parseKeyword(inputs);
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).contains(keyword)) {
+                foundTasks.add(display.get(i));
+            }
+        }
+        UI.findDisplay(foundTasks);
+    }
 }

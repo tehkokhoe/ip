@@ -112,4 +112,12 @@ public class Parser {
 
         return task;
     }
+
+    public static String parseKeyword(String[] input) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException(UI.getIndent() + "☹ OOPS!!! I don't know what keyword to look for");
+        }
+
+        return input[1];
+    }
 }
