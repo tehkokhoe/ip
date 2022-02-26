@@ -76,39 +76,49 @@ public class Duke {
             switch (cmd) {
             case BYE:
                 ui.byeDisplay();
+                assert result == "";
                 break;
             case LIST:
                 result = tasks.list();
+                assert result != "";
                 break;
             case MARK:
                 result = tasks.mark(inputs);
                 storage.save(tasks.getTasks());
+                assert result != "";
                 break;
             case UNMARK:
                 result = tasks.unmark(inputs);
                 storage.save(tasks.getTasks());
+                assert result != "";
                 break;
             case TODO:
                 result = tasks.addToDo(inputs);
                 storage.save(tasks.getTasks());
+                assert result != "";
                 break;
             case DEADLINE:
                 result = tasks.addDeadline(inputs);
                 storage.save(tasks.getTasks());
+                assert result != "";
                 break;
             case EVENT:
                 result = tasks.addEvent(inputs);
                 storage.save(tasks.getTasks());
+                assert result != "";
                 break;
             case DELETE:
                 result = tasks.delete(inputs);
                 storage.save(tasks.getTasks());
+                assert result != "";
                 break;
             case DATEFORMAT:
                 result = ui.showDateFormats();
+                assert result != "";
                 break;
             case FIND:
                 result = tasks.find(inputs);
+                assert result != "";
                 break;
             default:
                 throw new IllegalStateException(UI.getIndent() + "Unexpected value: " + cmd);
@@ -127,6 +137,7 @@ public class Duke {
         String[] inputs = Parser.parseGuiInput(input);
         try {
             Command cmd = Parser.parseCommand(inputs);
+            assert cmd == Command.valueOf(inputs[0]);
             return this.execute(cmd, inputs);
         } catch (IllegalArgumentException e) {
             return ui.showError(UI.getIndent() + "Invalid Command: " + inputs[0]);
