@@ -18,7 +18,7 @@ Format: `deadline TASK_DESCRIPTION /by DATE`
 
 Example: `deadline return book /by 10/02/2024 1100`
 
-See [dateformat](https://github.com/tehkokhoe/ip/tree/master/docs#dateformat) for accepted formats for date input.
+See [dateformat](https://github.com/tehkokhoe/ip/tree/master/docs#viewing-accepted-date-formats-dateformat) for accepted formats for date input.
 
 ### Adding an Event task: `event`
 
@@ -31,7 +31,7 @@ Example:
 - `event lunch date /at 07/08/2022 1300`
 - `event dinner date /at 04/12/2022`
   
-See [dateformat](https://github.com/tehkokhoe/ip/tree/master/docs#dateformat) for accepted formats for date input.
+See [dateformat](https://github.com/tehkokhoe/ip/tree/master/docs#viewing-accepted-date-formats-dateformat) for accepted formats for date input.
 
 ### Viewing your task list: `list`
 
