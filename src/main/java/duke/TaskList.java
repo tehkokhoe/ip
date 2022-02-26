@@ -29,105 +29,112 @@ public class TaskList {
         return tasks;
     }
 
-    public void list() {
-        UI.listDisplay(display);
+    public String list() {
+        return UI.listDisplay(display);
     }
 
     /**
-     * Mark a task.
+     * Marks a task, and returns a response.
      *
-     * @param inputs user input that has been seperated into command and index.
+     * @param inputs the user input that has been seperated into command and index.
+     * @return the response after marking a task.
      * @throws DukeException If index is not given, index given is not an integer or
      * index > size of task list.
      */
-    public void mark(String[] inputs) throws DukeException {
+    public String mark(String[] inputs) throws DukeException {
         int markIndex = Parser.parseMarkIndex(display, inputs);
         display.get(markIndex - 1).setDone();
         tasks.set(markIndex - 1, display.get(markIndex - 1).toRecord());
-        UI.markDisplay(display.get(markIndex - 1));
+        return UI.markDisplay(display.get(markIndex - 1));
     }
 
     /**
-     * Unmark a task.
+     * Unmarks a task and returns a response.
      *
-     * @param inputs user input that has been seperated into command and index.
+     * @param inputs the user input that has been seperated into command and index.
+     * @return the response after unmarking a task.
      * @throws DukeException If index is not given, index given is not an integer or
      * index > size of task list.
      */
-    public void unmark(String[] inputs) throws DukeException {
+    public String unmark(String[] inputs) throws DukeException {
         int unmarkIndex = Parser.parseUnmarkIndex(display, inputs);
         display.get(unmarkIndex - 1).setUndone();
         tasks.set(unmarkIndex - 1, display.get(unmarkIndex - 1).toRecord());
-        UI.unmarkDisplay(display.get(unmarkIndex - 1));
+        return UI.unmarkDisplay(display.get(unmarkIndex - 1));
     }
 
     /**
-     * Add a {@link ToDo} {@link Task}.
+     * Adds a {@link ToDo} {@link Task} and returns a response.
      *
-     * @param inputs user input that has been seperated into command and description.
+     * @param inputs the user input that has been seperated into command and description.
+     * @return the response after adding the to do task to the list.
      * @throws DukeException If input length < 2.
      */
-    public void addToDo(String[] inputs) throws DukeException {
+    public String addToDo(String[] inputs) throws DukeException {
         Parser.checkToDoDescription(inputs);
         Task toDo = new ToDo(inputs[1]);
         display.add(toDo);
         tasks.add(toDo.toRecord());
-        UI.toDoDisplay(toDo, display);
+        return UI.toDoDisplay(toDo, display);
     }
 
     /**
-     * Add a {@link Deadline} {@link Task}.
+     * Adds a {@link Deadline} {@link Task} and returns a response.
      *
-     * @param inputs user input that has been seperated into command and description.
+     * @param inputs the user input that has been seperated into command and description.
+     * @return the response after adding the deadline task to the list.
      * @throws DukeException If input length < 2.
      */
-    public void addDeadline(String[] inputs) throws DukeException {
+    public String addDeadline(String[] inputs) throws DukeException {
         Parser.checkDeadlineDescription(inputs);
         String[] splitByDate = Parser.splitDeadlineDate(inputs);
         String byDate = splitByDate[1];
         Task deadline = new Deadline(splitByDate[0], byDate);
         display.add(deadline);
         tasks.add(deadline.toRecord());
-        UI.deadlineDisplay(deadline, display);
+        return UI.deadlineDisplay(deadline, display);
     }
 
     /**
-     * Add a {@link Event} {@link Task}.
+     * Adds a {@link Event} {@link Task} and returns a response.
      *
      * @param inputs user input that has been seperated into command and description.
+     * @return the response after adding the event task to the list.
      * @throws DukeException If input length < 2.
      */
-    public void addEvent(String[] inputs) throws DukeException {
+    public String addEvent(String[] inputs) throws DukeException {
         Parser.checkEventDescription(inputs);
         String[] splitAtDate = Parser.splitEventDate(inputs);
         String atDate = splitAtDate[1];
         Task event = new Event(splitAtDate[0], atDate);
         display.add(event);
         tasks.add(event.toRecord());
-        UI.eventDisplay(event, display);
+        return UI.eventDisplay(event, display);
     }
 
     /**
-     * Delete a task from the task list.
+     * Delete a task from the task list and returns a response.
      *
      * @param inputs user input that has been seperated into command and index.
+     * @return the response after deleting a task from the list.
      * @throws DukeException If index is not given, index given is not an integer or
      * index > size of task list.
      */
-    public void delete(String[] inputs) throws DukeException {
+    public String delete(String[] inputs) throws DukeException {
         int deleteIndex = Parser.parseDeleteIndex(inputs, display);
         Task deletedTask = display.remove(deleteIndex - 1);
         tasks.remove(deleteIndex - 1);
-        UI.deleteDisplay(deletedTask, display);
+        return UI.deleteDisplay(deletedTask, display);
     }
 
     /**
-     * Find a task from the task list.
+     * Find a task from the task list and return a response
      *
      * @param inputs user input that has been seperated into command and keyword.
+     * @return the response after finding a task from the list.
      * @throws DukeException If keyword is not given.
      */
-    public void find(String[] inputs) throws DukeException {
+    public String find(String[] inputs) throws DukeException {
         String keyword = Parser.parseKeyword(inputs);
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
@@ -135,6 +142,6 @@ public class TaskList {
                 foundTasks.add(display.get(i));
             }
         }
-        UI.findDisplay(foundTasks);
+        return UI.findDisplay(foundTasks);
     }
 }

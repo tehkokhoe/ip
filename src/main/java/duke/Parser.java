@@ -172,6 +172,17 @@ public class Parser {
     }
 
     /**
+     * Returns a {@link String} array with the command and description seperated.
+     *
+     * @param input the user input.
+     * @return the array with command and description seperated.
+     */
+    public static String[] parseGuiInput(String input) {
+        String[] inputs = input.split(" ", 2);
+        return inputs;
+    }
+
+    /**
      * Returns a Task object by parsing entry from saved file.
      *
      * @param entry a task string in the form saved in file.
@@ -196,6 +207,13 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Returns the keyword in the user input.
+     *
+     * @param input the user input.
+     * @return the keyword associated with find command.
+     * @throws DukeException If keyword is not given.
+     */
     public static String parseKeyword(String[] input) throws DukeException {
         if (input.length < 2) {
             throw new DukeException(UI.getIndent() + "☹ OOPS!!! I don't know what keyword to look for");
