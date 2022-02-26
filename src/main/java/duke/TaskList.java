@@ -73,6 +73,9 @@ public class TaskList {
     public String addToDo(String[] inputs) throws DukeException {
         Parser.checkToDoDescription(inputs);
         Task toDo = new ToDo(inputs[1]);
+        if (this.isDuplicate(toDo)) {
+            return UI.duplicateDisplay(toDo);
+        }
         display.add(toDo);
         tasks.add(toDo.toRecord());
         return UI.toDoDisplay(toDo, display);
@@ -90,6 +93,9 @@ public class TaskList {
         String[] splitByDate = Parser.splitDeadlineDate(inputs);
         String byDate = splitByDate[1];
         Task deadline = new Deadline(splitByDate[0], byDate);
+        if (this.isDuplicate(deadline)) {
+            return UI.duplicateDisplay(deadline);
+        }
         display.add(deadline);
         tasks.add(deadline.toRecord());
         return UI.deadlineDisplay(deadline, display);
@@ -107,6 +113,9 @@ public class TaskList {
         String[] splitAtDate = Parser.splitEventDate(inputs);
         String atDate = splitAtDate[1];
         Task event = new Event(splitAtDate[0], atDate);
+        if (this.isDuplicate(event)) {
+            return UI.duplicateDisplay(event);
+        }
         display.add(event);
         tasks.add(event.toRecord());
         return UI.eventDisplay(event, display);
@@ -143,5 +152,9 @@ public class TaskList {
             }
         }
         return UI.findDisplay(foundTasks);
+    }
+
+    public boolean isDuplicate(Task task) {
+        return display.contains(task);
     }
 }

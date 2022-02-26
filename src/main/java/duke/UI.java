@@ -111,7 +111,7 @@ public class UI {
     /**
      * Returns added {@link ToDo} {@link Task}.
      *
-     * @param toDo the added toDo task.
+     * @param toDo  the added toDo task.
      * @param tasks the list of tasks.
      * @return the response to todo command.
      */
@@ -130,7 +130,7 @@ public class UI {
      * Returns added {@link Deadline} {@link Task}.
      *
      * @param deadline the added deadline task.
-     * @param tasks the list of tasks.
+     * @param tasks    the list of tasks.
      * @return the response to deadline command.
      */
     public static String deadlineDisplay(Task deadline, ArrayList<Task> tasks) {
@@ -166,7 +166,7 @@ public class UI {
      * Returns deleted task.
      *
      * @param deletedTask the deleted task.
-     * @param tasks the list of tasks.
+     * @param tasks       the list of tasks.
      * @return the response to delete command.
      */
     public static String deleteDisplay(Task deletedTask, ArrayList<Task> tasks) {
@@ -242,5 +242,9 @@ public class UI {
         }
 
         return response;
+    }
+
+    public static String duplicateDisplay(Task task) {
+        return String.format("You already have task\n %s\non your list", task);
     }
 }
