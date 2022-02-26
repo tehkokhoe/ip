@@ -1,6 +1,20 @@
 package duke;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 public class Duke {
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private UI ui;
     private Storage storage;
     private TaskList tasks;
@@ -49,60 +63,73 @@ public class Duke {
     }
 
     /**
-     * Executes {@link Command} and inputs given.
+     * Executes {@link Command} with inputs given and returns a response.
      *
-     * @param cmd one of the commands given in the enum {@link Command}
-     * @param inputs the user input the has been split into command and description
+     * @param cmd one of the commands given in the enum {@link Command}.
+     * @param inputs the user input the has been split into command and description.
+     * @return the response after executing command.
      * @see Command
      */
-    public void execute(Command cmd, String[] inputs) {
+    public String execute(Command cmd, String[] inputs) {
         try {
+            String result = "";
             switch (cmd) {
             case BYE:
                 ui.byeDisplay();
                 break;
             case LIST:
-                tasks.list();
+                result = tasks.list();
                 break;
             case MARK:
-                tasks.mark(inputs);
+                result = tasks.mark(inputs);
                 storage.save(tasks.getTasks());
                 break;
             case UNMARK:
-                tasks.unmark(inputs);
+                result = tasks.unmark(inputs);
                 storage.save(tasks.getTasks());
                 break;
             case TODO:
-                tasks.addToDo(inputs);
+                result = tasks.addToDo(inputs);
                 storage.save(tasks.getTasks());
                 break;
             case DEADLINE:
-                tasks.addDeadline(inputs);
+                result = tasks.addDeadline(inputs);
                 storage.save(tasks.getTasks());
                 break;
             case EVENT:
-                tasks.addEvent(inputs);
+                result = tasks.addEvent(inputs);
                 storage.save(tasks.getTasks());
                 break;
             case DELETE:
-                tasks.delete(inputs);
+                result = tasks.delete(inputs);
                 storage.save(tasks.getTasks());
                 break;
             case DATEFORMAT:
-                ui.showDateFormats();
+                result = ui.showDateFormats();
                 break;
             case FIND:
-                tasks.find(inputs);
+                result = tasks.find(inputs);
                 break;
             default:
                 throw new IllegalStateException(UI.getIndent() + "Unexpected value: " + cmd);
             }
+            return result;
         } catch (NumberFormatException e) {
-            ui.showError(UI.getIndent() + "☹ OOPS!!! Task number given is not suitable");
+            return ui.showError(UI.getIndent() + "☹ OOPS!!! Task number given is not suitable");
         } catch (DukeException | IllegalStateException e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         } catch (IllegalArgumentException e) {
-            ui.showError(UI.getIndent() + "Invalid command: " + cmd);
+            return ui.showError(UI.getIndent() + "Invalid command: " + cmd);
+        }
+    }
+
+    public String getResponse(String input) {
+        String[] inputs = Parser.parseGuiInput(input);
+        try {
+            Command cmd = Parser.parseCommand(inputs);
+            return this.execute(cmd, inputs);
+        } catch (IllegalArgumentException e) {
+            return ui.showError(UI.getIndent() + "Invalid Command: " + inputs[0]);
         }
     }
 }
