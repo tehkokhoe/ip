@@ -37,7 +37,7 @@ public class Storage {
             StringBuilder output = new StringBuilder();
 
             for (int i = 0; i < tasks.size(); i++) {
-                output.append(tasks.get(0)).append("\n");
+                output.append(tasks.get(i)).append("\n");
             }
 
             writer.write(output.toString());

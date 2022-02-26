@@ -2,10 +2,13 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class MainWindow extends AnchorPane {
@@ -17,6 +20,12 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Pane user;
+    @FXML
+    private ImageView userPic;
+    @FXML
+    private Label userText;
 
     private Duke duke;
 
@@ -26,6 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        userPic.setImage(userImage);
     }
 
     public void setDuke(Duke d) {
@@ -36,9 +46,9 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        userText.setText(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DukeDialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
     }
