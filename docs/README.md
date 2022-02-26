@@ -1,59 +1,99 @@
-# Duke
-
-> “Your mind is for having ideas, not holding them.” – David Allen [(source)](https://dansilvestre.com/productivity-quotes)
-
-Duke eases your mind of having to keep track of things. It's,
-
-- text-based
-- simple
-- ~~FAST~~ *SUPER* FAST to use
-
-All you need to do is,
-1. download it from here.
-2. double-click it.
-3. add your tasks.
-4. let it manage your tasks for you 😉
-
-And it is **FREE**!
-
-Features:
-- [x] Managing tasks
-- [ ] Managing deadlines (coming soon)
-- [ ] Reminders (coming soon)
-
-If you are a Java programmer, you can use it to practice Java too. Here's the `main` method:
-```
-public static void main(String[] args) {
-    new Duke().run();
-}
-```
-
 # User Guide
 
 ## Features 
 
-### Feature-ABC
+### Adding a ToDo task: `todo`
 
-Description of the feature.
+Adds a ToDo task to the task list.
 
-### Feature-XYZ
+Format: `todo TASK_DESCRIPTION`
 
-Description of the feature.
+Example: `todo read book`
 
-## Usage
+### Adding a Deadline task: `deadline`
 
-### `Keyword` - Describe action
+Adds a Deadline task to the task list.
 
-Describe the action and its outcome.
+Format: `deadline TASK_DESCRIPTION /by DATE`
 
-Example of usage: 
+Example: `deadline return book /by 10/02/2024 1100`
 
-`keyword (optional arguments)`
+See [dateformat](https://github.com/tehkokhoe/ip/tree/master/docs#dateformat) for accepted formats for date input.
+
+### Adding an Event task: `event`
+
+Adds an Event task to the task list.
+
+Format: `event TASK_DESCRIPTION /at START_DATE[-END_DATE]`
+
+Example: 
+- `event book fair /at 09/11/2022 1200-1300`
+- `event lunch date /at 07/08/2022 1300`
+- `event dinner date /at 04/12/2022`
+  
+See [dateformat](https://github.com/tehkokhoe/ip/tree/master/docs#dateformat) for accepted formats for date input.
+
+### Viewing your task list: `list`
+
+Displays your task list.
+
+### Marking a task as done: `mark`
+
+Marks a task as done in your task list.
+
+format: `mark INDEX`
+
+Example: `mark 1`
 
 Expected outcome:
-
-Description of the outcome.
-
 ```
-expected output
+Nice! I've marked this task as done:
+ [T][X] read book
 ```
+
+### Marking a task as not done: `unmark`
+
+Marks a task as not done in your task list.
+
+format: `unmark INDEX`
+
+Example: `unmark 2`
+
+Expected outcome:
+```
+OK, I've marked this task as not done yet:
+ [T][ ] eat fish
+```
+
+### Deleting a task: `delete`
+
+Deletes a task in your task list.
+
+format: `delete INDEX`
+
+Example: `delete 3`
+
+Expected outcome:
+```
+Noted. I've removed this task:
+ [T][ ] run
+Now you have 2 task(s) in the list
+```
+
+### Finding tasks with specific keyword: `find`
+
+Finds tasks that contains a keyword in the list.
+
+format: `find KEYWORD`
+
+Example: `find book`
+
+Expected outcome:
+```
+Here are the matching tasks in your list:
+ 1. [T][X] read book
+```
+
+### Viewing accepted date formats: `dateformat`
+
+Displays a list of available date formats for input.
